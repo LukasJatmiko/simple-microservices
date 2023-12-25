@@ -1,0 +1,1 @@
+drop table sensor_data;
