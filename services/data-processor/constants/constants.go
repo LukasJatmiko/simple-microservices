@@ -4,16 +4,12 @@ import (
 	"github.com/LukasJatmiko/simple-microservices/data-processor/types"
 )
 
-/*
-driver
-*/
-// const DriverMysql types.Database = "MYSQL"
-// const DriverPostgres types.Database = "POSTGRES"
+const AuthTypeStatic types.AuthType = "STATIC"
+const AuthTypeJWT types.AuthType = "JWT"
 
 /*
 environments
 */
-// const ENVAppName types.Environment = "APP_NAME"
 const ENVAppPort types.Environment = "APP_PORT"
 
 const ENVDBURI types.Environment = "DB_URI"
@@ -28,5 +24,8 @@ const ENVRabbitmqQName types.Environment = "RABBITMQ_Q_NAME"
 const ENVRabbitmqRoutingKey types.Environment = "RABBITMQ_ROUTINGKEY"
 const ENVRabbitmqConsumerName types.Environment = "RABBITMQ_CONSUMER_NAME"
 
-// const ENVAuthJWTPrivateKey types.Environment = "AUTH_JWT_PRIVATE_KEY"
-// const ENVAuthJWTPublicKey types.Environment = "AUTH_JWT_PUBLIC_KEY"
+const ENVAuthType types.Environment = "AUTH_TYPE"
+const ENVAuthTokens types.Environment = "AUTH_TOKENS"
+const ENVAuthJWTPrivateKey types.Environment = "AUTH_JWT_PRIVATE_KEY"
+const ENVAuthJWTPublicKey types.Environment = "AUTH_JWT_PUBLIC_KEY"
+const ENVAuthJWTExpiration types.Environment = "AUTH_JWT_EXPIRATION"
