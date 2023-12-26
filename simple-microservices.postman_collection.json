@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "1e22d6a6-4ddf-4b8a-8fa8-a3d02837d864",
+		"name": "simple-microservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30567526",
+		"_collection_link": "https://www.postman.com/admestic/workspace/pub/collection/30567526-1e22d6a6-4ddf-4b8a-8fa8-a3d02837d864?action=share&source=collection_link&creator=30567526"
+	},
+	"item": [
+		{
+			"name": "dummy-sensor-update-config",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sensor_configuration\":{\r\n        \"sensor_data_interval\":\"1m\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "data-processor-get-sensor-data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiZGVuaXNAdGhlZ21haWwuY29tIiwidXNlcl9uYW1lIjoiRGVuaXMiLCJpc3MiOiJkYXRhLXByb2Nlc3NvciIsInN1YiI6IkRlbmlzIiwiYXVkIjpbImRhdGEtcHJvY2Vzc29yIl0sImV4cCI6MTcwMzY3ODczNSwibmJmIjoxNzAzNTkyMzM1LCJpYXQiOjE3MDM1OTIzMzUsImp0aSI6IjRjMTk0MjllLTkzMWItNDMzMC1iZjFhLTA1MzkwMzMzNTIzOCJ9.DzoGfjCbiBx61myHckmdWm32-q2CQvramkEQoMFP7xnzfdGInYBDCpfg5jgMnOw6otYNfJC7dIbVbLYhi0wS40iaKS3mM8DKmX6USxq1--CWofxt4CR7A-0G1B91PtAAXVj5XTaYgH8dgR5I2uF_bOxkgYh-RYUAoKmJ2A3Dw4llYOIr-phT0Uyq8BFIz3XkbwL5kyZYwRrpTmzeIePOHhpv1XlRe4_2kxuId6SrBhrtD9W2fCpTyAbXaH-sxDLPi-54mPHywXxJOzkd3_q4yM1gljjdc1K-eWUxKqd-tkZHiZQGLPR8Lgmt1tZHi7_JAk1yhf5K1OcoZ4t9BzAL6tKB6q1h9ntvcbQ_RL2Qdr92C8iWmZ2pK8u4KFq8K4uKX-DfGGzYuQfyY043--nGUALL4LpYLEH--V537kOce_o4dbPS5BPjVlgxTKAq3wgjRDZBxxBREE3qRqDgpqCTQ9mu1dbVSrj8Gt1pAbLZ2ZfWocx6mLjLe1-QPvVN_9JW",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sensor_configuration\":{\r\n        \"sensor_data_interval\":\"1m\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/sensor/?id1=FO&id2=1&page=3&rowsperpage=2&order=desc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"sensor",
+						""
+					],
+					"query": [
+						{
+							"key": "id1",
+							"value": "FO"
+						},
+						{
+							"key": "id2",
+							"value": "1"
+						},
+						{
+							"key": "page",
+							"value": "3"
+						},
+						{
+							"key": "rowsperpage",
+							"value": "2"
+						},
+						{
+							"key": "starttime",
+							"value": "2023-12-26 14:35:00",
+							"disabled": true
+						},
+						{
+							"key": "endtime",
+							"value": "2023-12-26 14:37:00",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "desc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "data-processor-delete-sensor-data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiZGVuaXNAdGhlZ21haWwuY29tIiwidXNlcl9uYW1lIjoiRGVuaXMiLCJpc3MiOiJkYXRhLXByb2Nlc3NvciIsInN1YiI6IkRlbmlzIiwiYXVkIjpbImRhdGEtcHJvY2Vzc29yIl0sImV4cCI6MTcwMzY3ODczNSwibmJmIjoxNzAzNTkyMzM1LCJpYXQiOjE3MDM1OTIzMzUsImp0aSI6IjRjMTk0MjllLTkzMWItNDMzMC1iZjFhLTA1MzkwMzMzNTIzOCJ9.DzoGfjCbiBx61myHckmdWm32-q2CQvramkEQoMFP7xnzfdGInYBDCpfg5jgMnOw6otYNfJC7dIbVbLYhi0wS40iaKS3mM8DKmX6USxq1--CWofxt4CR7A-0G1B91PtAAXVj5XTaYgH8dgR5I2uF_bOxkgYh-RYUAoKmJ2A3Dw4llYOIr-phT0Uyq8BFIz3XkbwL5kyZYwRrpTmzeIePOHhpv1XlRe4_2kxuId6SrBhrtD9W2fCpTyAbXaH-sxDLPi-54mPHywXxJOzkd3_q4yM1gljjdc1K-eWUxKqd-tkZHiZQGLPR8Lgmt1tZHi7_JAk1yhf5K1OcoZ4t9BzAL6tKB6q1h9ntvcbQ_RL2Qdr92C8iWmZ2pK8u4KFq8K4uKX-DfGGzYuQfyY043--nGUALL4LpYLEH--V537kOce_o4dbPS5BPjVlgxTKAq3wgjRDZBxxBREE3qRqDgpqCTQ9mu1dbVSrj8Gt1pAbLZ2ZfWocx6mLjLe1-QPvVN_9JW",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sensor_configuration\":{\r\n        \"sensor_data_interval\":\"1m\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/sensor/?id1=FO&id2=1&starttime=2023-12-26 14:35:00&endtime=2023-12-26 14:35:40",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"sensor",
+						""
+					],
+					"query": [
+						{
+							"key": "id1",
+							"value": "FO"
+						},
+						{
+							"key": "id2",
+							"value": "1"
+						},
+						{
+							"key": "starttime",
+							"value": "2023-12-26 14:35:00"
+						},
+						{
+							"key": "endtime",
+							"value": "2023-12-26 14:35:40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "data-processor-update-sensor-data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiZGVuaXNAdGhlZ21haWwuY29tIiwidXNlcl9uYW1lIjoiRGVuaXMiLCJpc3MiOiJkYXRhLXByb2Nlc3NvciIsInN1YiI6IkRlbmlzIiwiYXVkIjpbImRhdGEtcHJvY2Vzc29yIl0sImV4cCI6MTcwMzY3ODczNSwibmJmIjoxNzAzNTkyMzM1LCJpYXQiOjE3MDM1OTIzMzUsImp0aSI6IjRjMTk0MjllLTkzMWItNDMzMC1iZjFhLTA1MzkwMzMzNTIzOCJ9.DzoGfjCbiBx61myHckmdWm32-q2CQvramkEQoMFP7xnzfdGInYBDCpfg5jgMnOw6otYNfJC7dIbVbLYhi0wS40iaKS3mM8DKmX6USxq1--CWofxt4CR7A-0G1B91PtAAXVj5XTaYgH8dgR5I2uF_bOxkgYh-RYUAoKmJ2A3Dw4llYOIr-phT0Uyq8BFIz3XkbwL5kyZYwRrpTmzeIePOHhpv1XlRe4_2kxuId6SrBhrtD9W2fCpTyAbXaH-sxDLPi-54mPHywXxJOzkd3_q4yM1gljjdc1K-eWUxKqd-tkZHiZQGLPR8Lgmt1tZHi7_JAk1yhf5K1OcoZ4t9BzAL6tKB6q1h9ntvcbQ_RL2Qdr92C8iWmZ2pK8u4KFq8K4uKX-DfGGzYuQfyY043--nGUALL4LpYLEH--V537kOce_o4dbPS5BPjVlgxTKAq3wgjRDZBxxBREE3qRqDgpqCTQ9mu1dbVSrj8Gt1pAbLZ2ZfWocx6mLjLe1-QPvVN_9JW",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sensor_configuration\":{\r\n        \"sensor_data_interval\":\"1m\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/sensor/?id1=FO&id2=1&starttime=2023-12-26 14:35:00&endtime=2023-12-26 14:37:00&newvalue=30",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"sensor",
+						""
+					],
+					"query": [
+						{
+							"key": "id1",
+							"value": "FO"
+						},
+						{
+							"key": "id2",
+							"value": "1"
+						},
+						{
+							"key": "starttime",
+							"value": "2023-12-26 14:35:00"
+						},
+						{
+							"key": "endtime",
+							"value": "2023-12-26 14:37:00"
+						},
+						{
+							"key": "newvalue",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "data-processor-login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\":{\r\n        \"email\":\"denis@thegmail.com\",\r\n        \"password\":\"denis123\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
