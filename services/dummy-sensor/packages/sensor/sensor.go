@@ -8,11 +8,11 @@ import (
 )
 
 type SensorData struct {
-	Value     float64 `json:"value"`
-	Type      string  `json:"type"`
-	ID1       string  `json:"id1"`
-	ID2       int     `json:"id2"`
-	Timestamp time.Time
+	Value     float64   `json:"value"`
+	Type      string    `json:"type"`
+	ID1       string    `json:"id1"`
+	ID2       int       `json:"id2"`
+	Timestamp time.Time `json:"timestamp"`
 }
 
 type SensorHandler interface {
