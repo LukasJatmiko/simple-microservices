@@ -37,3 +37,9 @@ func NewAPIHandler(dbDriver driver.Driver) APIHandler {
 		DBDriver: dbDriver,
 	}
 }
+
+func Mount(handler APIHandler, app *echo.Group) {
+	app.GET("/", handler.GetSensorData(new(APIFilter)))
+	app.DELETE("/", handler.DeleteSensorData(new(APIFilter)))
+	app.PATCH("/", handler.UpdateSensorData(new(APIFilter)))
+}

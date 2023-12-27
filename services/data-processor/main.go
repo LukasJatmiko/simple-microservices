@@ -2,12 +2,17 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"strings"
 	"time"
 
 	"github.com/LukasJatmiko/simple-microservices/data-processor/constants"
 	"github.com/LukasJatmiko/simple-microservices/data-processor/driver"
 	"github.com/LukasJatmiko/simple-microservices/data-processor/packages/api"
+	"github.com/LukasJatmiko/simple-microservices/data-processor/packages/auth"
+	authMiddleware "github.com/LukasJatmiko/simple-microservices/data-processor/packages/auth/middlewares"
 	"github.com/LukasJatmiko/simple-microservices/data-processor/packages/sensor"
+	"github.com/LukasJatmiko/simple-microservices/data-processor/types"
 	"github.com/LukasJatmiko/simple-microservices/data-processor/utils"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -69,12 +74,38 @@ func main() {
 	// Routes
 	RGapi := ec.Group("/api")
 	RGv1 := RGapi.Group("/v1")
-	RGsensor := RGv1.Group("/sensor")
 
+	//auth group
+	authGroup := RGv1.Group("/auth")
+	RSAPrivateKey, e := os.ReadFile(utils.GetEnvOrDefaultString(string(constants.ENVAuthJWTPrivateKey), "./jwtRS256.pem"))
+	if e != nil {
+		ec.Logger.Fatal(e)
+	}
+	RSAPublicKey, e := os.ReadFile(utils.GetEnvOrDefaultString(string(constants.ENVAuthJWTPublicKey), "./jwtRS256.pub"))
+	if e != nil {
+		ec.Logger.Fatal(e)
+	}
+	authOptions := &auth.Options{
+		AuthType:          types.AuthType(utils.GetEnvOrDefaultString(string(constants.ENVAuthType), string(constants.AuthTypeJWT))),
+		AuthTokens:        strings.Split(utils.GetEnvOrDefaultString(string(constants.ENVAuthTokens), ""), ";"),
+		AUthJWTExpiration: utils.GetEnvOrDefaultDuration(string(constants.ENVAuthJWTExpiration), (24 * time.Hour)),
+		AuthJWTPrivateKey: []byte(RSAPrivateKey),
+		AuthJWTPublicKey:  []byte(RSAPublicKey),
+		AuthJWTIssuer:     "data-processor",
+	}
+	authHandler := auth.NewAuthHandler(authOptions, gormDriver)
+	auth.Mount(authOptions, authHandler, authGroup)
+
+	//auth middleware
+	amw, e := authMiddleware.NewAuthMiddleware(authOptions)
+	if e != nil {
+		ec.Logger.Fatal(e)
+	}
+
+	//sensor group
+	RGsensor := RGv1.Group("/sensor", amw.ValidateAuth)
 	apiHandler := api.NewAPIHandler(gormDriver)
-	RGsensor.GET("/", apiHandler.GetSensorData(new(api.APIFilter)))
-	RGsensor.DELETE("/", apiHandler.DeleteSensorData(new(api.APIFilter)))
-	RGsensor.PATCH("/", apiHandler.UpdateSensorData(new(api.APIFilter)))
+	api.Mount(apiHandler, RGsensor)
 
 	// Start server
 	appPort := utils.GetEnvOrDefaultString(string(constants.ENVAppPort), "8081")
