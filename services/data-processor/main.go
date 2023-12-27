@@ -71,6 +71,9 @@ func main() {
 	ec.Use(middleware.Logger())
 	ec.Use(middleware.Recover())
 
+	//docs
+	ec.Static("/docs", "docs")
+
 	// Routes
 	RGapi := ec.Group("/api")
 	RGv1 := RGapi.Group("/v1")
